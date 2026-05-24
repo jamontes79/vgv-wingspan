@@ -3,11 +3,22 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 target="$repo_root/dist/codex/vgv-wingspan"
+force=false
+
+if [[ "${1:-}" == "--force" ]]; then
+  force=true
+elif [[ $# -gt 0 ]]; then
+  echo "Usage: $0 [--force]" >&2
+  exit 64
+fi
 
 if [[ -e "$target" ]]; then
-  echo "Refusing to overwrite existing generated package: $target" >&2
-  echo "Remove it first, then rerun this script." >&2
-  exit 1
+  if [[ "$force" != true ]]; then
+    echo "Refusing to overwrite existing generated package: $target" >&2
+    echo "Run $0 --force to regenerate it." >&2
+    exit 1
+  fi
+  rm -rf "$target"
 fi
 
 mkdir -p "$target"

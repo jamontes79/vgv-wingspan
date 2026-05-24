@@ -13,6 +13,15 @@ compatibility: Designed for Claude Code (or similar products with agent support)
 
 Run quality review agents. Review manually written code, assess existing codebases, or check a branch before merging.
 
+## Shared Wingspan context
+
+Apply the portable workflow guidance in these references:
+
+- [Wingspan philosophy](references/wingspan-philosophy.md)
+- [Workflow conventions](references/workflow-conventions.md)
+- [Output directories](references/output-directories.md)
+- [Quality standards](references/quality-standards.md)
+
 ## Review Scope
 
 <review_scope>$ARGUMENTS</review_scope>

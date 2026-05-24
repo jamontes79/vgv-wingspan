@@ -41,11 +41,27 @@ skills/shared/references/quality-standards.md
 
 ## Acceptance Criteria
 
-- [ ] Core Wingspan philosophy is available outside root `CLAUDE.md`.
-- [ ] Workflow conventions are available to Codex-facing skills.
-- [ ] Output directory rules are available to Codex-facing skills.
-- [ ] Quality standards are available to Codex-facing skills.
-- [ ] `CLAUDE.md` remains present for Claude users.
-- [ ] Claude validation still passes.
-- [ ] Codex validation still passes.
+- [x] Core Wingspan philosophy is available outside root `CLAUDE.md`.
+- [x] Workflow conventions are available to Codex-facing skills.
+- [x] Output directory rules are available to Codex-facing skills.
+- [x] Quality standards are available to Codex-facing skills.
+- [x] `CLAUDE.md` remains present for Claude users.
+- [x] Claude validation still passes.
+- [x] Codex validation still passes.
 
+## Implementation Notes
+
+- Added portable shared references:
+  - `skills/shared/references/wingspan-philosophy.md`
+  - `skills/shared/references/workflow-conventions.md`
+  - `skills/shared/references/output-directories.md`
+  - `skills/shared/references/quality-standards.md`
+- Linked those references into the core skills listed in this task:
+  `brainstorm`, `plan`, `build`, `review`, `hotfix`, `create-pr`, and
+  `debrief`.
+- Added a note to `CLAUDE.md` that shared references are the source of truth
+  for portable Claude/Codex behavior.
+- Regenerated `dist/codex/vgv-wingspan` so Codex-facing skills contain
+  dereferenced copies of the shared guidance.
+- Claude validation passed with the known root `CLAUDE.md` warning.
+- Codex validation passed for `dist/codex/vgv-wingspan`.

@@ -1,0 +1,1 @@
+../../shared/references/output-directories.md

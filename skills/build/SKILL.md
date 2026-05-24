@@ -13,6 +13,15 @@ compatibility: Designed for Claude Code (or similar products with agent support)
 
 Take a plan from `docs/plan/` and turn it into shipped code: implement features, write tests, and validate quality.
 
+## Shared Wingspan context
+
+Apply the portable workflow guidance in these references:
+
+- [Wingspan philosophy](references/wingspan-philosophy.md)
+- [Workflow conventions](references/workflow-conventions.md)
+- [Output directories](references/output-directories.md)
+- [Quality standards](references/quality-standards.md)
+
 ## Build Progress
 
 Copy this checklist and track your progress:

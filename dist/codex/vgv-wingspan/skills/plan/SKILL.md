@@ -12,6 +12,15 @@ compatibility: Designed for Claude Code (or similar products with agent support)
 
 Transform feature descriptions, bug reports, or improvement ideas into well-structured markdown files that follow VGV conventions and best practices. This command provides flexible detail levels to match your needs.
 
+## Shared Wingspan context
+
+Apply the portable workflow guidance in these references:
+
+- [Wingspan philosophy](references/wingspan-philosophy.md)
+- [Workflow conventions](references/workflow-conventions.md)
+- [Output directories](references/output-directories.md)
+- [Quality standards](references/quality-standards.md)
+
 ## Feature Description
 
 <feature_description>$ARGUMENTS</feature_description>

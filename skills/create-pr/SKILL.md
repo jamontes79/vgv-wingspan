@@ -12,6 +12,15 @@ compatibility: Designed for Claude Code (or similar products with git access)
 
 Stage uncommitted changes, commit them, push the branch, and open a pull request on the project's Git hosting platform.
 
+## Shared Wingspan context
+
+Apply the portable workflow guidance in these references:
+
+- [Wingspan philosophy](references/wingspan-philosophy.md)
+- [Workflow conventions](references/workflow-conventions.md)
+- [Output directories](references/output-directories.md)
+- [Quality standards](references/quality-standards.md)
+
 ## Steps checklist
 
 - [ ] Step 0: Parse arguments

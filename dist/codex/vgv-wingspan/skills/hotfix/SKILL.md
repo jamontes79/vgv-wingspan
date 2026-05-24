@@ -12,6 +12,15 @@ compatibility: Designed for Claude Code (or similar products with agent support)
 
 Apply a minimal, targeted fix fast. No brainstorm document, no plan document — but tests and review are still non-negotiable.
 
+## Shared Wingspan context
+
+Apply the portable workflow guidance in these references:
+
+- [Wingspan philosophy](references/wingspan-philosophy.md)
+- [Workflow conventions](references/workflow-conventions.md)
+- [Output directories](references/output-directories.md)
+- [Quality standards](references/quality-standards.md)
+
 ## Bug Description
 
 <bug_description>$ARGUMENTS</bug_description>

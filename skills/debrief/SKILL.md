@@ -14,6 +14,15 @@ Produce a structured, blameless debrief document after an incident, failed relea
 
 **Use this when** a production incident, failed release, flaky deploy, or significant bug warrants more than just a fix — when the team needs to understand *why* it happened and prevent recurrence.
 
+## Shared Wingspan context
+
+Apply the portable workflow guidance in these references:
+
+- [Wingspan philosophy](references/wingspan-philosophy.md)
+- [Workflow conventions](references/workflow-conventions.md)
+- [Output directories](references/output-directories.md)
+- [Quality standards](references/quality-standards.md)
+
 ## Incident Context
 
 <incident_context>$ARGUMENTS</incident_context>
