@@ -45,6 +45,14 @@ Local Codex iteration uses the personal marketplace at:
 ~/.agents/plugins/marketplace.json
 ```
 
+On first setup, create the marketplace entry and copy the generated package to
+the source path that Codex reads:
+
+```bash
+python3 ~/.codex/skills/.system/plugin-creator/scripts/create_basic_plugin.py vgv-wingspan --with-marketplace
+rsync -a --delete dist/codex/vgv-wingspan/ ~/plugins/vgv-wingspan/
+```
+
 Read the marketplace name:
 
 ```bash
@@ -60,7 +68,8 @@ codex plugin add vgv-wingspan@<marketplace-name>
 After changing the generated package, update the cachebuster and reinstall:
 
 ```bash
-python3 ~/.codex/skills/.system/plugin-creator/scripts/update_plugin_cachebuster.py dist/codex/vgv-wingspan
+rsync -a --delete dist/codex/vgv-wingspan/ ~/plugins/vgv-wingspan/
+python3 ~/.codex/skills/.system/plugin-creator/scripts/update_plugin_cachebuster.py ~/plugins/vgv-wingspan
 codex plugin add vgv-wingspan@<marketplace-name>
 ```
 

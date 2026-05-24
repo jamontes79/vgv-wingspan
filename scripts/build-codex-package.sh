@@ -23,6 +23,7 @@ fi
 
 mkdir -p "$target"
 rsync -aL "$repo_root/.codex-plugin/" "$target/.codex-plugin/"
+cp "$target/.codex-plugin/plugin.json" "$target/plugin.json"
 rsync -aL --exclude "/shared/" "$repo_root/skills/" "$target/skills/"
 
 find "$target/skills" -name SKILL.md -print0 |
