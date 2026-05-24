@@ -56,10 +56,27 @@ Known affected skills:
 
 ## Acceptance Criteria
 
-- [ ] Codex validation passes skill metadata checks.
-- [ ] `create-pr` no longer blocks Codex validation.
-- [ ] `rebase` no longer blocks Codex validation.
-- [ ] Shared Claude behavior is not changed without validation.
-- [ ] Any Codex-only skill adaptation is isolated in the generated package if required.
-- [ ] Claude validation still passes if shared files changed.
+- [x] Codex validation passes skill metadata checks.
+- [x] `create-pr` no longer blocks Codex validation.
+- [x] `rebase` no longer blocks Codex validation.
+- [x] Shared Claude behavior is not changed without validation.
+- [x] Any Codex-only skill adaptation is isolated in the generated package if required.
+- [x] Claude validation still passes if shared files changed.
 
+## Implementation Notes
+
+- Added `scripts/build-codex-package.sh`.
+- Generated `dist/codex/vgv-wingspan`.
+- The generated package:
+  - Copies `.codex-plugin/plugin.json`.
+  - Copies all first-class skills except `skills/shared`.
+  - Dereferences shared-reference symlinks into each generated skill.
+  - Removes `disable-model-invocation: true` only from generated skill copies.
+- Root Claude-facing skill files were not changed for Codex-only validation.
+- Codex validation passed:
+
+  ```bash
+  python3 ~/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py dist/codex/vgv-wingspan
+  ```
+
+- Claude validation still passed with the known root `CLAUDE.md` warning.
