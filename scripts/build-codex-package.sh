@@ -25,6 +25,9 @@ mkdir -p "$target"
 rsync -aL "$repo_root/.codex-plugin/" "$target/.codex-plugin/"
 cp "$target/.codex-plugin/plugin.json" "$target/plugin.json"
 rsync -aL --exclude "/shared/" "$repo_root/skills/" "$target/skills/"
+rsync -aL "$repo_root/hooks/recommendations/" "$target/hooks/recommendations/"
 
+# Codex rejects this Claude-specific frontmatter flag, so strip it only from
+# generated skill copies.
 find "$target/skills" -name SKILL.md -print0 |
   xargs -0 perl -0pi -e 's/^disable-model-invocation:\s*true\n//m'

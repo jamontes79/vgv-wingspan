@@ -92,5 +92,7 @@ jobs:
       - uses: actions/checkout@v6
       - name: Build Codex package
         run: scripts/build-codex-package.sh --force
+      - name: Check generated Codex package is committed
+        run: git diff --exit-code -- dist/codex/vgv-wingspan
       - name: Validate Codex package
         run: python3 scripts/validate-codex-plugin.py dist/codex/vgv-wingspan

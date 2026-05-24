@@ -50,6 +50,7 @@ def main() -> int:
             errors.append("root plugin.json must match .codex-plugin/plugin.json")
 
     validate_skills(plugin_root / "skills", errors)
+    validate_packaged_references(plugin_root, errors)
 
     if errors:
         print("Codex plugin validation failed:")
@@ -149,6 +150,32 @@ def validate_skills(skills_root: Path, errors: list[str]) -> None:
             errors.append(
                 f"skill {skill_root.name} disable-model-invocation must be absent or false"
             )
+
+
+def validate_packaged_references(plugin_root: Path, errors: list[str]) -> None:
+    skills_root = plugin_root / "skills"
+    if not skills_root.is_dir():
+        return
+
+    references_recommendations = any(
+        "hooks/recommendations/" in path.read_text()
+        for path in skills_root.glob("*/SKILL.md")
+    )
+    if not references_recommendations:
+        return
+
+    recommendations_root = plugin_root / "hooks" / "recommendations"
+    if not recommendations_root.is_dir():
+        errors.append("skills reference hooks/recommendations/ but package is missing it")
+        return
+
+    recommendation_files = sorted(recommendations_root.glob("*.json"))
+    if not recommendation_files:
+        errors.append("hooks/recommendations/ must contain at least one JSON file")
+        return
+
+    for recommendation_file in recommendation_files:
+        load_json(recommendation_file, errors)
 
 
 def has_frontmatter_string(frontmatter: str, key: str) -> bool:

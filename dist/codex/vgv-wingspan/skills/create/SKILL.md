@@ -59,20 +59,35 @@ If **no skills from that plugin are listed**, the plugin is not installed. Use *
   1. "Yes, install it" *(default)*
   2. "No, stop"
 
-If the user chooses to install, output the following commands and **stop**:
+If the user chooses to install, output the commands for the current host and
+**stop**.
+
+For Claude Code:
 
 ```bash
 /plugin marketplace add <marketplace>
 /plugin install <plugin>
 ```
 
-Tell the user to run these commands, then re-invoke `/create` with the same project description. **Do not proceed to Step 4.**
+For Codex, when the marketplace is configured:
+
+```bash
+codex plugin add <plugin>@<marketplace-name>
+```
+
+Tell the user to run the relevant command, then start a new thread if needed and
+re-invoke the create workflow with the same project description. **Do not
+proceed to Step 4.**
 
 ## Step 4: Find and invoke the plugin's project-creation skill
 
 The available skills are listed in the system-reminder in your conversation context. Look for skills prefixed with the matched plugin name (`<plugin-name>:<skill-name>`). Among those, find the skill whose name or description best indicates project creation (look for terms like "create", "scaffold", "new project", "generate", "init").
 
-Invoke it using the **Skill tool** with its fully qualified name (e.g., `my-plugin:scaffold-project`), passing the user's full project description as arguments.
+Invoke the companion creation skill with its fully qualified name (e.g., `my-plugin:scaffold-project`), passing the user's full project description as arguments. In Claude Code, use the **Skill tool** when available.
+
+If direct companion skill invocation is unavailable in the current host, tell the
+user which companion plugin matched and which creation workflow to run after
+installation. Do not scaffold the project directly from Wingspan.
 
 - **No project-creation skill found for the plugin:** Inform the user the companion plugin is registered but does not provide a project-creation skill. Stop.
 - **If the skill invocation fails:** Surface the error to the user and suggest verifying the companion plugin is properly installed.
