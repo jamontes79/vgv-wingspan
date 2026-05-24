@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Features
+
+* add generated Codex plugin package and validation workflow
+
 ## [0.0.2](https://github.com/VeryGoodOpenSource/vgv-wingspan/compare/v0.0.1...v0.0.2) (2026-04-22)
 
 

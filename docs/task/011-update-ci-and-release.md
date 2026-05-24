@@ -39,9 +39,26 @@ Ensure Codex compatibility remains validated and released alongside Claude compa
 
 ## Acceptance Criteria
 
-- [ ] Release automation updates `.codex-plugin/plugin.json`.
-- [ ] Release automation does not reference missing files unintentionally.
-- [ ] CI or manual validation path for Codex is documented.
-- [ ] Claude validation remains part of the release checklist.
-- [ ] Changelog entry is prepared when implementation lands.
+- [x] Release automation updates `.codex-plugin/plugin.json`.
+- [x] Release automation does not reference missing files unintentionally.
+- [x] CI or manual validation path for Codex is documented.
+- [x] Claude validation remains part of the release checklist.
+- [x] Changelog entry is prepared when implementation lands.
 
+## Implementation Notes
+
+- Added `scripts/validate-codex-plugin.py` so CI does not depend on a local
+  `~/.codex` skill install.
+- Added a `codex-plugin-validate` CI job that regenerates
+  `dist/codex/vgv-wingspan` and validates it with the repo-local validator.
+- Kept the existing Claude `plugin-validate` CI job.
+- Updated `.release-please-config.json` to version:
+  - `.claude-plugin/plugin.json`
+  - `.codex-plugin/plugin.json`
+  - `dist/codex/vgv-wingspan/.codex-plugin/plugin.json`
+  - `dist/codex/vgv-wingspan/plugin.json`
+- Confirmed release-please no longer references missing
+  `.claude-plugin/marketplace.json` files.
+- Added an unreleased changelog entry for Codex compatibility.
+- Repo-local Codex validation, local Codex plugin validation, and JSON
+  validation passed.
