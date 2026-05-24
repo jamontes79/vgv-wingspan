@@ -49,9 +49,27 @@ Keep Claude hook behavior intact while creating a Codex-safe path for companion 
 
 ## Acceptance Criteria
 
-- [ ] Claude hook behavior remains unchanged.
-- [ ] Codex manifest does not declare unsupported hooks.
-- [ ] Companion recommendation data remains reusable.
-- [ ] Codex has a documented fallback for companion plugin recommendations.
-- [ ] Hook tests still pass.
+- [x] Claude hook behavior remains unchanged.
+- [x] Codex manifest does not declare unsupported hooks.
+- [x] Companion recommendation data remains reusable.
+- [x] Codex has a documented fallback for companion plugin recommendations.
+- [x] Hook tests still pass.
 
+## Implementation Notes
+
+- Kept `hooks/hooks.json` Claude-specific and did not add hooks to the Codex
+  manifest.
+- Added `skills/recommend-companion-plugins/SKILL.md` as a manual Codex-safe
+  fallback that reads the same `hooks/recommendations/*.json` data.
+- Hardened `hooks/recommend-plugins.sh` without changing its output schema:
+  - Exits silently when `jq` is unavailable.
+  - Skips invalid recommendation JSON files.
+  - Checks installed plugin names exactly instead of by substring.
+  - Supports `marketplace` as either a string or an array.
+  - Uses hook input `cwd`/workspace fields when available, falling back to
+    `PWD`, so detection can run from a runtime-provided project root.
+- Extended hook tests for missing `jq`, invalid recommendation JSON, substring
+  plugin names, multiple marketplace names, and project-root input detection.
+- Hook tests passed with `51 passed, 0 failed`.
+- Codex validation passed for `dist/codex/vgv-wingspan`.
+- Claude validation passed with the known root `CLAUDE.md` warning.

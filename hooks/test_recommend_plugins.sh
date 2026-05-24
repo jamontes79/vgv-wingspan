@@ -51,6 +51,17 @@ run_hook() {
   echo '{}' | (cd "$TEST_DIR" && bash "$WRAPPER") 2>/dev/null || true
 }
 
+run_hook_with_input_from_dir() {
+  local input="$1"
+  local dir="$2"
+  echo "$input" | (cd "$dir" && bash "$WRAPPER") 2>/dev/null || true
+}
+
+run_hook_without_jq() {
+  mkdir -p "$TEST_DIR/no-jq-bin"
+  echo '{}' | (cd "$TEST_DIR" && PATH="$TEST_DIR/no-jq-bin" /bin/bash "$WRAPPER") 2>/dev/null || true
+}
+
 # Add a recommendation JSON file to the test fixtures.
 add_recommendation() {
   local name="$1"
@@ -472,6 +483,93 @@ test_output_is_valid_json() {
   teardown
 }
 
+test_missing_jq_exits_silently() {
+  echo "test: exits silently when jq is missing"
+  setup
+  add_recommendation "test-plugin" '{
+    "plugin": "test-plugin",
+    "detect": { "file": "pubspec.yaml", "pattern": "." },
+    "marketplace": "Org/repo",
+    "description": "Test plugin."
+  }'
+  add_project_file "pubspec.yaml" "name: my_app"
+  local output
+  output=$(run_hook_without_jq)
+  assert_empty "$output" "no output when jq is unavailable"
+  assert_file_not_exists "$MARKER" "no marker written"
+  teardown
+}
+
+test_invalid_recommendation_json_is_skipped() {
+  echo "test: invalid recommendation JSON is skipped"
+  setup
+  add_recommendation "bad-plugin" '{ invalid json'
+  add_recommendation "good-plugin" '{
+    "plugin": "good-plugin",
+    "detect": { "file": "pubspec.yaml", "pattern": "." },
+    "marketplace": "Org/repo",
+    "description": "Good plugin."
+  }'
+  add_project_file "pubspec.yaml" "name: my_app"
+  local output
+  output=$(run_hook)
+  assert_not_contains "$output" "bad-plugin" "invalid recommendation excluded"
+  assert_contains "$output" "good-plugin" "valid recommendation still emitted"
+  teardown
+}
+
+test_plugin_name_substring_does_not_count_as_installed() {
+  echo "test: plugin names that are substrings of installed plugins are still recommended"
+  setup
+  add_recommendation "test-plugin" '{
+    "plugin": "test-plugin",
+    "detect": { "file": "pubspec.yaml", "pattern": "." },
+    "marketplace": "Org/repo",
+    "description": "Test plugin."
+  }'
+  add_project_file "pubspec.yaml" "name: my_app"
+  add_settings ".claude/settings.local.json" '{"plugins": ["test-plugin-extra"]}'
+  local output
+  output=$(run_hook)
+  assert_contains "$output" "test-plugin" "substring match does not suppress recommendation"
+  teardown
+}
+
+test_multiple_marketplace_names_in_output() {
+  echo "test: output includes multiple marketplace names"
+  setup
+  add_recommendation "test-plugin" '{
+    "plugin": "test-plugin",
+    "detect": { "file": "pubspec.yaml", "pattern": "." },
+    "marketplace": ["Org/repo-a", "Org/repo-b"],
+    "description": "Test plugin."
+  }'
+  add_project_file "pubspec.yaml" "name: my_app"
+  local output
+  output=$(run_hook)
+  assert_contains "$output" "Org/repo-a" "first marketplace reference in output"
+  assert_contains "$output" "Org/repo-b" "second marketplace reference in output"
+  teardown
+}
+
+test_runtime_neutral_root_detection_from_input() {
+  echo "test: runtime-neutral project root detection from input"
+  setup
+  add_recommendation "test-plugin" '{
+    "plugin": "test-plugin",
+    "detect": { "file": "pubspec.yaml", "pattern": "." },
+    "marketplace": "Org/repo",
+    "description": "Test plugin."
+  }'
+  add_project_file "pubspec.yaml" "name: my_app"
+  mkdir -p "$TEST_DIR/nested"
+  local output
+  output=$(run_hook_with_input_from_dir "{\"cwd\":\"$TEST_DIR\"}" "$TEST_DIR/nested")
+  assert_contains "$output" "test-plugin" "detects project files using input cwd"
+  assert_file_exists "$MARKER" "marker keyed to project root"
+  teardown
+}
+
 test_file_detection_is_case_insensitive() {
   echo "test: 'file' mode grep is case-insensitive"
   setup
@@ -548,6 +646,16 @@ echo ""
 test_marketplace_in_output
 echo ""
 test_output_is_valid_json
+echo ""
+test_missing_jq_exits_silently
+echo ""
+test_invalid_recommendation_json_is_skipped
+echo ""
+test_plugin_name_substring_does_not_count_as_installed
+echo ""
+test_multiple_marketplace_names_in_output
+echo ""
+test_runtime_neutral_root_detection_from_input
 echo ""
 test_file_detection_is_case_insensitive
 echo ""
