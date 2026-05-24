@@ -52,9 +52,25 @@ Preserve review and research behavior in Codex even if top-level Claude agents a
 
 ## Acceptance Criteria
 
-- [ ] Codex-facing review workflows do not depend on top-level Claude agent loading.
-- [ ] Review and research criteria remain available to Codex.
-- [ ] Existing Claude agents are not removed unless intentionally approved.
-- [ ] `review`, `build`, `hotfix`, `plan`, and `plan-technical-review` still describe complete review behavior.
-- [ ] Codex validation passes.
+- [x] Codex-facing review workflows do not depend on top-level Claude agent loading.
+- [x] Review and research criteria remain available to Codex.
+- [x] Existing Claude agents are not removed unless intentionally approved.
+- [x] `review`, `build`, `hotfix`, `plan`, and `plan-technical-review` still describe complete review behavior.
+- [x] Codex validation passes.
 
+## Implementation Notes
+
+- Inventoried agent references with:
+
+  ```bash
+  rg -n '@[a-z0-9-]+-agent|Task|agent' skills agents
+  ```
+
+- Added portable summaries under `skills/shared/references/agents/` for the
+  research, analysis, review, and codebase-review agents.
+- Linked the relevant agent references into orchestrator skills.
+- Updated `brainstorm`, `plan`, `build`, `hotfix`, `review`, and
+  `plan-technical-review` with direct fallback instructions for runtimes where
+  top-level Claude agent invocation is unavailable.
+- Regenerated `dist/codex/vgv-wingspan`.
+- Codex validation passed for the generated package.

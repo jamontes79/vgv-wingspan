@@ -63,6 +63,9 @@ Run a quick project review to understand existing patterns:
 
 - Task @codebase-review-agent("Understand existing patterns related to: <feature_description>")
 
+If top-level agent invocation is unavailable, perform the equivalent review
+directly using [codebase review guidance](references/agents/codebase-review.md).
+
 Focus on: similar features, established patterns, CLAUDE.md guidance.
 
 #### 1.2. Collaborative conversation

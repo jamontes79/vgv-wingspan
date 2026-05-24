@@ -127,6 +127,10 @@ The 5 agents and their report filenames:
 | **@architecture-review-agent** | `docs/reviews/architecture-review.md` |
 | **@pr-readiness-review-agent** | `docs/reviews/pr-readiness-review.md` |
 
+If top-level agent invocation is unavailable, run the same review passes
+directly using the matching references in `references/agents/` and write each
+report to the listed file.
+
 ### After all reviews complete
 
 Follow the [review consolidation procedure](references/review-consolidation.md): categorize findings, auto-fix minor issues, fix critical issues, present important issues to the user, and record suggestions.

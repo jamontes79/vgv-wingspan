@@ -18,6 +18,9 @@ Run the following agents in parallel to conduct a comprehensive technical review
 - @vgv-review-agent: Review the plan for adherence to Very Good Engineering practices and project conventions. Ensure the implementation follows our established patterns and conventions.
 - @plan-splitting-agent: Assess plan scope and recommend splitting into multiple PRs if the plan is too large for a single reviewable PR.
 
+If top-level agent invocation is unavailable, run the same review passes
+directly using the matching references in `references/agents/`.
+
 After all agents complete, if the plan-splitting-agent recommends a split:
 
 1. Present the proposal to the developer via **AskUserQuestion** with options:

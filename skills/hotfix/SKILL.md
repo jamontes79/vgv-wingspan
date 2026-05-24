@@ -42,6 +42,9 @@ Run a focused codebase exploration to find the problem area:
 
 - Task @codebase-review-agent("Locate the code responsible for this bug. Focus narrowly on the symptom described — do not survey the entire codebase. Bug: <bug_description>")
 
+If top-level agent invocation is unavailable, perform the equivalent focused
+review directly using [codebase review guidance](references/agents/codebase-review.md).
+
 After the agent returns:
 
 1. Read the identified files and their immediate neighbors to understand the context.
@@ -115,6 +118,10 @@ The 2 agents and their report filenames:
 |-------|------------|
 | **@vgv-review-agent** | `docs/hotfix-review/vgv-review.md` |
 | **@test-quality-review-agent** | `docs/hotfix-review/test-quality-review.md` |
+
+If top-level agent invocation is unavailable, run the same review passes
+directly using the matching references in `references/agents/` and write each
+report to the listed file.
 
 ### After reviews complete
 

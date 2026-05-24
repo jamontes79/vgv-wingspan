@@ -88,6 +88,10 @@ Default agents and their report filenames (substitute `<PWD>` with the absolute 
 | **@test-quality-review-agent** | `<PWD>/docs/code-review/test-quality-review.md` |
 | **@architecture-review-agent** | `<PWD>/docs/code-review/architecture-review.md` |
 
+If top-level agent invocation is unavailable, run the same review passes
+directly using the matching references in `references/agents/` and write each
+report to the listed file.
+
 **If an agent fails:** Note the failure, continue with successful agents. After all agents complete, report which (if any) failed and offer to retry.
 
 ## Step 3 — Consolidate & Present

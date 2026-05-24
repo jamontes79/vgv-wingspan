@@ -82,6 +82,10 @@ Run these agents in parallel to gather external information:
 - **@official-docs-research-agent**: Fetches and synthesizes official documentation for relevant frameworks, libraries, and APIs.
 - **@best-practices-research-agent**: Researches and synthesizes best practices for the project's technology stack, following VGV conventions first, then official documentation, and finally industry standards.
 
+If top-level agent invocation is unavailable, perform the same research directly
+using [official docs research](references/agents/official-docs-research.md) and
+[best practices research](references/agents/best-practices-research.md).
+
 ##### 1.1.2. Consolidate research findings
 
 After all research steps complete, consolidate findings:
@@ -123,6 +127,9 @@ Think like a product manager — what would make this issue clear and actionable
 After planning the issue structure, run the **user-flow-analysis-agent** to analyze the plan for flow completeness and gap identification:
 
 - Task @user-flow-analysis-agent(feature_description, research_findings)
+
+If top-level agent invocation is unavailable, perform the same analysis directly
+using [user flow analysis](references/agents/user-flow-analysis.md).
 
 **Flow Analysis Output:**
 
