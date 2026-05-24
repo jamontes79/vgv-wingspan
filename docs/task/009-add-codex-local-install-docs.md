@@ -57,10 +57,19 @@ Document how to install, validate, and iterate on the Codex-compatible plugin lo
 
 ## Acceptance Criteria
 
-- [ ] README has Codex-specific install instructions.
-- [ ] README keeps Claude install instructions separate.
-- [ ] Local validation command is documented.
-- [ ] Local install command is documented.
-- [ ] Cachebuster reinstall flow is documented.
-- [ ] New-thread requirement is documented.
+- [x] README has Codex-specific install instructions.
+- [x] README keeps Claude install instructions separate.
+- [x] Local validation command is documented.
+- [x] Local install command is documented.
+- [x] Cachebuster reinstall flow is documented.
+- [x] New-thread requirement is documented.
 
+## Implementation Notes
+
+- Added a separate `Claude Code` installation subsection.
+- Added a `Codex` installation subsection that targets the generated package at
+  `dist/codex/vgv-wingspan`.
+- Documented package generation, local validation, personal marketplace path,
+  marketplace-name lookup, install command, cachebuster update, reinstall, and
+  the new-thread requirement.
+- Codex validation passed for the generated package after the README update.
