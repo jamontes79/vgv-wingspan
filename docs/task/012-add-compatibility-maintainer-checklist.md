@@ -41,10 +41,17 @@ Include this baseline:
 
 ## Acceptance Criteria
 
-- [ ] Maintainer checklist exists.
-- [ ] Checklist includes Claude validation.
-- [ ] Checklist includes Codex validation.
-- [ ] Checklist includes hook tests.
-- [ ] Checklist includes skill metadata guardrails.
-- [ ] Checklist is linked from contributor-facing documentation.
+- [x] Maintainer checklist exists.
+- [x] Checklist includes Claude validation.
+- [x] Checklist includes Codex validation.
+- [x] Checklist includes hook tests.
+- [x] Checklist includes skill metadata guardrails.
+- [x] Checklist is linked from contributor-facing documentation.
 
+## Implementation Notes
+
+- Added a compatibility checklist to `CONTRIBUTING.md`.
+- Updated the CI checks table to include Codex package validation.
+- The checklist covers Claude validation, generated Codex package validation,
+  optional local Codex validator execution, hook tests, JSON validation, skill
+  metadata guardrails, Claude-only fallback requirements, and README accuracy.
