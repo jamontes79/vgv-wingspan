@@ -65,8 +65,32 @@ Use this if Codex requires changes that would alter Claude behavior.
 
 ## Acceptance Criteria
 
-- [ ] Same-root or generated-package strategy is selected.
-- [ ] The decision explicitly considers Claude behavior preservation.
-- [ ] If generated-package is selected, no Claude-facing skill metadata is changed for Codex-only reasons.
-- [ ] If same-root is selected, Claude validation and smoke behavior are checked after metadata changes.
+- [x] Same-root or generated-package strategy is selected.
+- [x] The decision explicitly considers Claude behavior preservation.
+- [x] If generated-package is selected, no Claude-facing skill metadata is changed for Codex-only reasons.
+- [x] If same-root is selected, Claude validation and smoke behavior are checked after metadata changes.
 
+## Decision
+
+Use **Option B: Generated Codex Package**.
+
+Codex validation after adding `.codex-plugin/plugin.json` showed that the
+same-root layout would require shared-tree changes for Codex-only reasons:
+
+- `skills/create-pr/SKILL.md` has `disable-model-invocation: true`.
+- `skills/rebase/SKILL.md` has `disable-model-invocation: true`.
+- `skills/shared` is a support directory, but Codex validates every direct
+  subdirectory under `skills/` as a skill and therefore expects
+  `skills/shared/SKILL.md`.
+
+Changing these in place would either alter Claude-facing skill metadata or turn
+the shared support directory into an exposed skill. The Codex package should
+therefore be generated under `dist/codex/vgv-wingspan` with Codex-safe skill
+copies and shared references placed outside the generated `skills/` directory.
+
+The root `.codex-plugin/plugin.json` remains useful as metadata, but local
+Codex validation and installation should target:
+
+```bash
+python3 ~/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py dist/codex/vgv-wingspan
+```
