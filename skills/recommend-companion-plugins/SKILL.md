@@ -6,9 +6,10 @@ when_to_use: Use when the user asks which companion plugins are recommended, wan
 
 # Recommend companion plugins
 
-Wingspan's Claude package recommends companion plugins through a hook. Codex
-does not consume that hook, so this skill provides a manual fallback that reads
-the same runtime-neutral recommendation data.
+Wingspan's Claude package recommends companion plugins through a Claude
+`PreToolUse` hook. The Codex package uses a Codex `UserPromptSubmit` hook for
+best-effort recommendation context, and this skill remains the manual fallback
+for inspecting the same runtime-neutral recommendation data on demand.
 
 ## Steps
 
