@@ -24,6 +24,7 @@ fi
 mkdir -p "$target"
 rsync -aL "$repo_root/.codex-plugin/" "$target/.codex-plugin/"
 cp "$target/.codex-plugin/plugin.json" "$target/plugin.json"
+cp "$repo_root/.mcp.json" "$target/.mcp.json"
 rsync -aL --exclude "/shared/" "$repo_root/skills/" "$target/skills/"
 rsync -aL "$repo_root/hooks/recommendations/" "$target/hooks/recommendations/"
 

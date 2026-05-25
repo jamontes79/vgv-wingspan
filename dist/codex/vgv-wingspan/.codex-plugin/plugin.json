@@ -4,6 +4,7 @@
   "version": "0.0.2",
   "description": "AI-native workflows following Very Good Ventures best practices.",
   "skills": "skills",
+  "mcpServers": ".mcp.json",
   "author": {
     "name": "Very Good Ventures",
     "url": "https://verygood.ventures"
