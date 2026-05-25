@@ -26,6 +26,7 @@ rsync -aL "$repo_root/.codex-plugin/" "$target/.codex-plugin/"
 cp "$target/.codex-plugin/plugin.json" "$target/plugin.json"
 cp "$repo_root/.mcp.json" "$target/.mcp.json"
 rsync -aL --exclude "/shared/" "$repo_root/skills/" "$target/skills/"
+mkdir -p "$target/hooks/recommendations"
 rsync -aL "$repo_root/hooks/recommendations/" "$target/hooks/recommendations/"
 
 # Codex rejects this Claude-specific frontmatter flag, so strip it only from

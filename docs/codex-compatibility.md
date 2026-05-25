@@ -75,8 +75,7 @@ Recent checks showed:
 
 Known repo issues to address while doing this work:
 
-- `.claude-plugin/plugin.json` has a keyword typo:
-  `software development lifecyle`.
+- `.claude-plugin/plugin.json` has a misspelled lifecycle keyword.
 - `README.md` and `hooks/recommendations/very-good-ai-flutter-plugin.json`
   reference different marketplace repo names.
 - `.release-please-config.json` references `.claude-plugin/marketplace.json`,
@@ -914,7 +913,7 @@ Acceptance criteria:
 
 4. Fix the manifest typo:
 
-   - Change `software development lifecyle` to `software development lifecycle`.
+   - Change the misspelled lifecycle keyword to `software development lifecycle`.
 
 5. Reconcile marketplace repo names:
 

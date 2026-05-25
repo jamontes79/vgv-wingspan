@@ -6,25 +6,14 @@ Resolve low-risk repository inconsistencies before introducing Codex files.
 
 ## Scope
 
-- Fix the typo in `.claude-plugin/plugin.json`.
+- Fix the misspelled lifecycle keyword in `.claude-plugin/plugin.json`.
 - Reconcile marketplace naming between README and recommendation metadata.
 - Fix or intentionally remove release-please references to missing marketplace files.
 
 ## Steps
 
-1. Fix the manifest keyword typo.
-
-   Change:
-
-   ```text
-   software development lifecyle
-   ```
-
-   To:
-
-   ```text
-   software development lifecycle
-   ```
+1. Fix the manifest keyword typo by changing the misspelled lifecycle keyword
+   to `software development lifecycle`.
 
 2. Decide the canonical Claude marketplace repository name.
 
@@ -55,7 +44,7 @@ Resolve low-risk repository inconsistencies before introducing Codex files.
 
 ## Acceptance Criteria
 
-- [x] `.claude-plugin/plugin.json` no longer contains `lifecyle`.
+- [x] `.claude-plugin/plugin.json` no longer contains the misspelled lifecycle keyword.
 - [x] README and recommendation metadata use the same canonical marketplace naming scheme.
 - [x] `.release-please-config.json` no longer references missing files unintentionally.
 - [x] JSON validation passes.
@@ -65,7 +54,7 @@ Resolve low-risk repository inconsistencies before introducing Codex files.
 
 Metadata typo:
 
-- Fixed `.claude-plugin/plugin.json` keyword from `software development lifecyle` to `software development lifecycle`.
+- Fixed `.claude-plugin/plugin.json` keyword to `software development lifecycle`.
 
 Marketplace references:
 

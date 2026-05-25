@@ -30,7 +30,7 @@ Include this baseline:
 1. Choose the checklist location:
 
    - `CONTRIBUTING.md`
-   - `docs/codex-compatibiliy.md`
+   - `docs/codex-compatibility.md`
    - A new dedicated compatibility checklist document
 
 2. Add the checklist.
