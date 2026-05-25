@@ -3,24 +3,26 @@
   "words": [
     "Anson",
     "cachebuster",
+    "glab",
     "codegen",
     "conventionalcommits",
     "frontmatter",
     "geolocation",
-    "glab",
     "goldens",
     "hotfixing",
     "hotfixes",
     "mocktail",
     "oneline",
-    "pasteable",
-    "pipefail",
     "pubspec",
     "runbook",
     "Strunk's",
-    "undiscussed",
+    "oneline",
     "worktree",
-    "worktrees"
+    "pasteable",
+    "pubspec",
+    "worktrees",
+    "undiscussed",
+    "pipefail"
   ],
   "flagWords": []
 }
