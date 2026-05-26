@@ -189,6 +189,7 @@ or generated Codex package behavior:
 - [ ] `python3 scripts/validate-codex-plugin.py dist/codex/vgv-wingspan` passes.
 - [ ] `python3 ~/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py dist/codex/vgv-wingspan` passes when the local Codex validator is available.
 - [ ] `bash hooks/test_recommend_plugins.sh` passes.
+- [ ] `bash hooks/test_recommend_plugins_codex.sh` passes.
 - [ ] JSON files validate with `jq`.
 - [ ] New skills include `name` and `description`.
 - [ ] New shared skills do not use `disable-model-invocation: true`.
