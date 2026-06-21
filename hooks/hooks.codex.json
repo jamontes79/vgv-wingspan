@@ -1,5 +1,4 @@
 {
-  "description": "Wingspan Codex hooks for companion plugin recommendations",
   "hooks": {
     "UserPromptSubmit": [
       {

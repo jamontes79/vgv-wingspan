@@ -34,6 +34,8 @@ ALLOWED_MANIFEST_KEYS = {
     "keywords",
 }
 
+ALLOWED_HOOKS_CONFIG_KEYS = {"hooks"}
+
 
 def main() -> int:
     plugin_root = Path(sys.argv[1] if len(sys.argv) > 1 else ".").resolve()
@@ -50,6 +52,7 @@ def main() -> int:
             errors.append("root plugin.json must match .codex-plugin/plugin.json")
 
     validate_skills(plugin_root / "skills", errors)
+    validate_hooks(plugin_root / "hooks" / "hooks.json", errors)
     validate_packaged_references(plugin_root, errors)
 
     if errors:
@@ -176,6 +179,20 @@ def validate_packaged_references(plugin_root: Path, errors: list[str]) -> None:
 
     for recommendation_file in recommendation_files:
         load_json(recommendation_file, errors)
+
+
+def validate_hooks(hooks_path: Path, errors: list[str]) -> None:
+    hooks_config = load_json(hooks_path, errors)
+    if hooks_config is None:
+        return
+
+    unknown = sorted(set(hooks_config) - ALLOWED_HOOKS_CONFIG_KEYS)
+    for key in unknown:
+        errors.append(f"unsupported hooks config field: {key}")
+
+    hooks = hooks_config.get("hooks")
+    if not isinstance(hooks, dict) or not hooks:
+        errors.append("hooks config must contain a non-empty `hooks` object")
 
 
 def has_frontmatter_string(frontmatter: str, key: str) -> bool:
