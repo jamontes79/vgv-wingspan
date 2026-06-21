@@ -1,0 +1,41 @@
+{
+  "id": "vgv-wingspan",
+  "name": "vgv-wingspan",
+  "version": "0.0.2",
+  "description": "AI-native workflows following Very Good Ventures best practices.",
+  "skills": "skills",
+  "mcpServers": ".mcp.json",
+  "author": {
+    "name": "Very Good Ventures",
+    "url": "https://verygood.ventures"
+  },
+  "homepage": "https://github.com/VeryGoodOpenSource/vgv-wingspan",
+  "repository": "https://github.com/VeryGoodOpenSource/vgv-wingspan",
+  "license": "MIT",
+  "keywords": [
+    "software engineering",
+    "workflow",
+    "best practices",
+    "flow automation",
+    "code generation",
+    "planning",
+    "ai assisted engineering",
+    "sdlc",
+    "software development lifecycle"
+  ],
+  "interface": {
+    "displayName": "VGV Wingspan",
+    "shortDescription": "AI-assisted engineering workflows for planning, building, and review.",
+    "longDescription": "VGV Wingspan provides structured software delivery workflows based on Very Good Ventures practices, including brainstorming, planning, implementation, review, hotfixes, pull requests, rebases, and debriefs.",
+    "developerName": "Very Good Ventures",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Brainstorm feature and product approaches",
+      "Create implementation plans",
+      "Build from plans with quality gates",
+      "Review code and pull request readiness",
+      "Prepare commits, branches, pull requests, rebases, and debriefs"
+    ],
+    "defaultPrompt": "Use Wingspan to guide this software engineering workflow."
+  }
+}

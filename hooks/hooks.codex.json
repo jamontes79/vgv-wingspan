@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${PLUGIN_ROOT}/hooks/recommend-plugins-codex.sh",
+            "timeout": 10,
+            "statusMessage": "Checking Wingspan companion plugin recommendations"
+          }
+        ]
+      }
+    ]
+  }
+}

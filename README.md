@@ -6,6 +6,8 @@
 
 ## Installation
 
+### Claude Code
+
 ### From the Marketplace
 
 One-line install from your terminal:
@@ -27,6 +29,52 @@ Or inside an active Claude Code session, run these as **two separate commands** 
    ```text
    /plugin install vgv-wingspan
    ```
+
+### Codex
+
+Build and validate the Codex package from this repository:
+
+```bash
+scripts/build-codex-package.sh --force
+python3 ~/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py dist/codex/vgv-wingspan
+```
+
+Local Codex iteration uses the personal marketplace at:
+
+```text
+~/.agents/plugins/marketplace.json
+```
+
+On first setup, create the marketplace entry and copy the generated package to
+the source path that Codex reads:
+
+```bash
+python3 ~/.codex/skills/.system/plugin-creator/scripts/create_basic_plugin.py vgv-wingspan --with-marketplace
+rsync -a --delete dist/codex/vgv-wingspan/ ~/plugins/vgv-wingspan/
+```
+
+Read the marketplace name:
+
+```bash
+python3 ~/.codex/skills/.system/plugin-creator/scripts/read_marketplace_name.py
+```
+
+Install from that marketplace:
+
+```bash
+codex plugin add vgv-wingspan@<marketplace-name>
+```
+
+After changing the generated package, update the cachebuster and reinstall:
+
+```bash
+rsync -a --delete dist/codex/vgv-wingspan/ ~/plugins/vgv-wingspan/
+python3 ~/.codex/skills/.system/plugin-creator/scripts/update_plugin_cachebuster.py ~/plugins/vgv-wingspan
+codex plugin add vgv-wingspan@<marketplace-name>
+```
+
+Start a new Codex thread after reinstalling. Existing threads keep their loaded
+plugin context.
 
 ## Getting Started
 

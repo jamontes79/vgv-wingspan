@@ -175,8 +175,26 @@ Every pull request runs the following checks automatically:
 | Spelling | Runs cspell on all `*.md` files | `config/cspell.json` |
 | Skill validation | Validates changed `SKILL.md` frontmatter and structure | `Flash-Brew-Digital/validate-skill@v1` |
 | Plugin validation | Validates plugin manifests via Claude Code CLI | `claude plugin validate .` |
+| Codex plugin validation | Builds and validates the generated Codex package | `scripts/validate-codex-plugin.py dist/codex/vgv-wingspan` |
 
 If the spelling check flags a legitimate word, add it to `config/cspell.json` in the `words` array.
+
+## Compatibility Checklist
+
+Run this checklist when changing manifests, skills, hooks, release automation,
+or generated Codex package behavior:
+
+- [ ] `claude plugin validate .` passes or known warnings are documented.
+- [ ] `scripts/build-codex-package.sh --force` regenerates the Codex package.
+- [ ] `python3 scripts/validate-codex-plugin.py dist/codex/vgv-wingspan` passes.
+- [ ] `python3 ~/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py dist/codex/vgv-wingspan` passes when the local Codex validator is available.
+- [ ] `bash hooks/test_recommend_plugins.sh` passes.
+- [ ] `bash hooks/test_recommend_plugins_codex.sh` passes.
+- [ ] JSON files validate with `jq`.
+- [ ] New skills include `name` and `description`.
+- [ ] New shared skills do not use `disable-model-invocation: true`.
+- [ ] Claude-only instructions are isolated or have Codex-safe fallbacks.
+- [ ] README install instructions are still accurate.
 
 ## Commit Convention
 

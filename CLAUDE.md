@@ -2,6 +2,10 @@
 
 Wingspan is a collection of AI-assisted engineering tools — skills, agents, and hooks — released as a Claude Code plugin.
 
+Portable workflow guidance lives in `skills/shared/references/`. Keep those
+shared references as the source of truth for behavior that should apply in both
+Claude and Codex-compatible packages.
+
 ## Philosophy
 
 Apply VGV's best practices and standards for scalable software to AI-assisted workflows. Each step of the development cycle should make subsequent steps clearer and closer to the user's intent. Build the right thing, build the thing right.

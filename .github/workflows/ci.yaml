@@ -85,3 +85,16 @@ jobs:
         run: npm install -g @anthropic-ai/claude-code
       - name: Validate Plugin
         run: claude plugin validate .
+  codex-plugin-validate:
+    name: 📦 Codex Plugin Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build Codex package
+        run: scripts/build-codex-package.sh --force
+      - name: Check generated Codex package is committed
+        run: git diff --exit-code -- dist/codex/vgv-wingspan
+      - name: Validate Codex package
+        run: python3 scripts/validate-codex-plugin.py dist/codex/vgv-wingspan
+      - name: Test Codex hooks
+        run: bash hooks/test_recommend_plugins_codex.sh
